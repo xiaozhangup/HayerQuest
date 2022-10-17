@@ -1,4 +1,4 @@
-package org.example.utils.tools;
+package me.xiaozhangup.hayerquest.utils.tools;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

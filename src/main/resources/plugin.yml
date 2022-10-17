@@ -1,4 +1,17 @@
-name: PluginName
+name: HayerQuest
 version: ${project.version}
 api-version: 1.16
-main: org.example.Main
+main: me.xiaozhangup.hayerquest.HayerQuest
+
+depend:
+  - IridiumSkyblock
+
+commands:
+  istodo:
+    description: The island todo book
+  isback:
+    description: Inside command
+  ispull:
+    description: Inside command
+  isopen:
+    description: Inside command
