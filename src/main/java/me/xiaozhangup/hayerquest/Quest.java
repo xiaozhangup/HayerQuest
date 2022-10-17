@@ -6,9 +6,6 @@ import org.bukkit.inventory.ItemStack;
 import java.util.List;
 
 public class Quest {
-
-    QuestType type;
-    TotalType act;
     String id;
     String name;
     List<ItemStack> items;
@@ -17,22 +14,6 @@ public class Quest {
     Integer crystal;
     Integer exp;
     Integer money;
-
-    public QuestType getType() {
-        return type;
-    }
-
-    public void setType(QuestType type) {
-        this.type = type;
-    }
-
-    public TotalType getAct() {
-        return act;
-    }
-
-    public void setAct(TotalType act) {
-        this.act = act;
-    }
 
     public String getId() {
         return id;
@@ -90,9 +71,8 @@ public class Quest {
         this.money = money;
     }
 
-    public Quest(QuestType questType, String n, TotalType action, List<ItemStack> request, Integer point, Integer c, Integer e, Integer m, String i) {
-        type = questType;
-        act = action;
+    public Quest(String n, List<ItemStack> request, Integer point, Integer c, Integer e, Integer m, String i) {
+
         items = request;
         value = point;
         name = n;

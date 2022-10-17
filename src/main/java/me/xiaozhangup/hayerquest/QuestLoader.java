@@ -14,23 +14,6 @@ public class QuestLoader {
 
     public static void loadQuest() {
         var config = HayerQuest.plugin.getConfig();
-        config.getStringList("Total").forEach((s -> {
-
-            var q = Arrays.stream(s.split(":")).toList();
-            Quest quest = new Quest(
-                    QuestType.TOTAL,
-                    "",
-                    TotalType.valueOf(q.get(0)),
-                    null,
-                    Integer.valueOf(q.get(1)),
-                    Integer.valueOf(q.get(2)),
-                    Integer.valueOf(q.get(3)),
-                    Integer.valueOf(q.get(4)),
-                    "T0"
-            );
-            total.add(quest);
-
-        }));
 
         for (int i = 1; i < Integer.MAX_VALUE; i++) {
             if (config.getString("Once." + i + ".Name") == null) break;
@@ -42,9 +25,7 @@ public class QuestLoader {
             }));
             var rew = Arrays.stream(config.getString("Once." + i + ".Reward").split(":")).toList();
             Quest quest = new Quest(
-                    QuestType.ONCE,
                     config.getString("Once." + i + ".Name"),
-                    null,
                     list,
                     null,
                     Integer.valueOf(q.get(0)),

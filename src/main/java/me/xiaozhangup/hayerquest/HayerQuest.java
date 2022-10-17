@@ -3,8 +3,6 @@ package me.xiaozhangup.hayerquest;
 import com.iridium.iridiumskyblock.IridiumSkyblock;
 import com.iridium.iridiumskyblock.api.IridiumSkyblockAPI;
 import com.iridium.iridiumskyblock.bank.BankItem;
-import me.xiaozhangup.hayerquest.listeners.PlayerEvent;
-import me.xiaozhangup.hayerquest.listeners.WorldEvent;
 import me.xiaozhangup.hayerquest.ui.TreeBook;
 import me.xiaozhangup.hayerquest.utils.command.Command;
 import me.xiaozhangup.hayerquest.utils.manager.ConfigManager;
@@ -45,10 +43,10 @@ public class HayerQuest extends JavaPlugin {
         saveDefaultConfig();
         reloadConfig();
 
-        listenerManager.addListeners(
-                new PlayerEvent(), new WorldEvent()
-        );
-        listenerManager.register();
+//        listenerManager.addListeners(
+//                new PlayerEvent(), new WorldEvent()
+//        );
+//        listenerManager.register();
 
         Command.register("istodo", (commandSender, command, s, inside) -> {
             TreeBook.open((Player) commandSender);
@@ -56,9 +54,8 @@ public class HayerQuest extends JavaPlugin {
         });
         Command.register("isback", (commandSender, command, s, inside) -> {
             Player p = (Player) commandSender;
-            switch (inside[0]) {
-                case "total" -> TreeBook.openTotal(p);
-                case "once" -> TreeBook.openOnce(p);
+            if ("once".equals(inside[0])) {
+                TreeBook.open(p);
             }
             return false;
         });
@@ -68,13 +65,7 @@ public class HayerQuest extends JavaPlugin {
         });
         Command.register("isopen", (commandSender, command, s, inside) -> {
             Player p = (Player) commandSender;
-            switch (inside[0]) {
-                case "t" -> {
-                    TreeBook.openTotalByType(p, TotalType.valueOf(inside[1]));
-                }
-                case "o" -> {
-
-                }
+            if ("o".equals(inside[0])) {
             }
             return false;
         });
