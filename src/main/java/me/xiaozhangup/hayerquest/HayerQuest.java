@@ -7,6 +7,7 @@ import me.xiaozhangup.hayerquest.utils.ItemChecker;
 import me.xiaozhangup.hayerquest.utils.command.Command;
 import me.xiaozhangup.hayerquest.utils.manager.ConfigManager;
 import me.xiaozhangup.hayerquest.utils.manager.ListenerManager;
+import me.xiaozhangup.hayerquest.utils.tools.IString;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.entity.Player;
@@ -20,6 +21,7 @@ public class HayerQuest extends JavaPlugin {
     public static ListenerManager listenerManager = new ListenerManager();
     public static MiniMessage mm = MiniMessage.miniMessage();
     private static Economy econ = null;
+    public static String prefix = "&8[&x&0&9&C&6&F&9空岛&8] ";
 
     public static Economy getEconomy() {
         return econ;
@@ -52,9 +54,9 @@ public class HayerQuest extends JavaPlugin {
 
             if (Integer.parseInt(inside[0]) - 1 != DataMaster.getLastDone(island)) return false;
             if (ItemChecker.check(p, QuestLoader.once.get(Integer.parseInt(inside[0]) - 1))) {
-                p.sendMessage("Done!");
+                p.sendMessage(IString.addColor(prefix + "&a你的任务提交完成! 请查看书本来知晓下一个任务的内容."));
             } else {
-                p.sendMessage("Not!");
+                p.sendMessage(IString.addColor(prefix + "&c任务提交失败.请注意购买获得的物品是无法用于任务提交的!"));
             }
             return false;
         });
