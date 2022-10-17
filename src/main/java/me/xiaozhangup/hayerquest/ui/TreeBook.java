@@ -41,10 +41,10 @@ public class TreeBook {
         Component component = mm.deserialize("      <b><black>空岛任务</black></b> <b><gold>当前</gold></b>\n<dark_gray><click:run_command:'/is'><-返回</click></dark_gray>  <gray>任务号: " + quest.getId() + "</gray>\n");
         component = component.append(mm.deserialize(
                 "\n名称: " + quest.getName() + "\n介绍: <dark_gray>" + quest.getContent() + "</dark_gray>\n\n" + "完成奖励: \n" + quest.getCrystal() + "*水晶 "
-                        + quest.getExp() + "*岛屿经验 " + quest.getMoney() + "*金钱 ").append(re[0]).append(mm.deserialize("\n\n翻到下一页查看需要的物品\n\n<b><dark_green><click:run_command:'/ispull " + quest.getId() + "'>点此提交</click></dark_green></b>")
+                        + quest.getExp() + "*岛屿经验 " + quest.getMoney() + "*金钱 ").append(re[0]).append(mm.deserialize("\n\n翻到下一页查看需要的物品和提交这个任务")
         ));
 
-        var book = Book.book(mm.deserialize("Todo"), mm.deserialize("HAPPYLAND Dev"), component, item[0]);
+        var book = Book.book(mm.deserialize("Todo"), mm.deserialize("HAPPYLAND Dev"), component, item[0].append(mm.deserialize("\n\n<b><dark_green><click:run_command:'/ispull " + quest.getId() + "'>点此提交</click></dark_green></b>")));
 
         p.openBook(book);
     }
