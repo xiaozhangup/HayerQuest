@@ -5,6 +5,7 @@ main: me.xiaozhangup.hayerquest.HayerQuest
 
 depend:
   - IridiumSkyblock
+  - Vault
 
 commands:
   istodo:

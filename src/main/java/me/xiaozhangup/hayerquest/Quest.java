@@ -12,13 +12,35 @@ public class Quest {
     Integer id;
     String name;
     List<ItemStack> items;
+    List<ItemStack> iReward;
     Integer value;
-
     Integer crystal;
     Integer exp;
     Integer money;
-
     String content;
+
+    public Quest(String n, List<ItemStack> request, Integer point, Integer c, Integer e, Integer m, Integer i, String con, List<ItemStack> ire) {
+
+        items = request;
+        iReward = ire;
+        value = point;
+        name = n;
+
+        id = i;
+
+        crystal = c;
+        exp = e;
+        money = m;
+        content = con;
+    }
+
+    public List<ItemStack> getiReward() {
+        return iReward;
+    }
+
+    public void setiReward(List<ItemStack> iReward) {
+        this.iReward = iReward;
+    }
 
     public String getContent() {
         return content;
@@ -83,22 +105,6 @@ public class Quest {
     public void setMoney(Integer money) {
         this.money = money;
     }
-
-    public Quest(String n, List<ItemStack> request, Integer point, Integer c, Integer e, Integer m, Integer i, String con) {
-
-        items = request;
-        value = point;
-        name = n;
-
-        id = i;
-
-        crystal = c;
-        exp = e;
-        money = m;
-        content = con;
-    }
-
-
 
     public void giveReward(Player p) {
 

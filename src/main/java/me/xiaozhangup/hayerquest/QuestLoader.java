@@ -19,8 +19,18 @@ public class QuestLoader {
             List<ItemStack> list = new ArrayList<>();
             q.forEach((s -> {
                 var item = Arrays.stream(s.split(":")).toList();
+                if (Material.getMaterial(item.get(0)) == null) return;
                 list.add(new ItemStack(Material.getMaterial(item.get(0)), Integer.parseInt(item.get(1))));
             }));
+
+            var ir = config.getStringList("Once." + i + ".ItemReward").stream().toList();
+            List<ItemStack> ilist = new ArrayList<>();
+            ir.forEach((s -> {
+                var item = Arrays.stream(s.split(":")).toList();
+                if (Material.getMaterial(item.get(0)) == null) return;
+                ilist.add(new ItemStack(Material.getMaterial(item.get(0)), Integer.parseInt(item.get(1))));
+            }));
+
             var rew = Arrays.stream(config.getString("Once." + i + ".Reward").split(":")).toList();
             Quest quest = new Quest(
                     config.getString("Once." + i + ".Name"),
@@ -30,7 +40,8 @@ public class QuestLoader {
                     Integer.valueOf(rew.get(1)),
                     Integer.valueOf(rew.get(2)),
                     i,
-                    config.getString("Once." + i + ".Content")
+                    config.getString("Once." + i + ".Content"),
+                    ilist
             );
             once.add(quest);
         }

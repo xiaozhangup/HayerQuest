@@ -1,9 +1,9 @@
 package me.xiaozhangup.hayerquest.utils.items;
 
+import me.xiaozhangup.hayerquest.utils.tools.IString;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import me.xiaozhangup.hayerquest.utils.tools.IString;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,8 +6,6 @@ import com.iridium.iridiumskyblock.database.Island;
 import com.iridium.iridiumskyblock.database.IslandBank;
 import me.xiaozhangup.hayerquest.utils.manager.ConfigManager;
 
-import java.util.List;
-
 public class DataMaster {
 
     private final static String oncelog = "done";

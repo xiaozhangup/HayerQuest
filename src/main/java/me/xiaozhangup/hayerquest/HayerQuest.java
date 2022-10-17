@@ -1,27 +1,25 @@
 package me.xiaozhangup.hayerquest;
 
 import com.iridium.iridiumskyblock.IridiumSkyblock;
-import com.iridium.iridiumskyblock.api.IridiumSkyblockAPI;
-import com.iridium.iridiumskyblock.bank.BankItem;
+import com.iridium.iridiumskyblock.database.User;
 import me.xiaozhangup.hayerquest.ui.TreeBook;
 import me.xiaozhangup.hayerquest.utils.ItemChecker;
 import me.xiaozhangup.hayerquest.utils.command.Command;
 import me.xiaozhangup.hayerquest.utils.manager.ConfigManager;
+import me.xiaozhangup.hayerquest.utils.manager.ListenerManager;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import me.xiaozhangup.hayerquest.utils.manager.ListenerManager;
 
 public class HayerQuest extends JavaPlugin {
 
     public static Plugin plugin;
     public static ListenerManager listenerManager = new ListenerManager();
-    private static Economy econ = null;
-
     public static MiniMessage mm = MiniMessage.miniMessage();
+    private static Economy econ = null;
 
     public static Economy getEconomy() {
         return econ;
@@ -46,6 +44,13 @@ public class HayerQuest extends JavaPlugin {
         });
         Command.register("ispull", (commandSender, command, s, inside) -> {
             Player p = (Player) commandSender;
+
+            User user = IridiumSkyblock.getInstance().getUserManager().getUser(p);
+            var is = user.getIsland();
+            if (is.isEmpty()) return false;
+            var island = is.get();
+
+            if (Integer.parseInt(inside[0]) - 1 != DataMaster.getLastDone(island)) return false;
             if (ItemChecker.check(p, QuestLoader.once.get(Integer.parseInt(inside[0]) - 1))) {
                 p.sendMessage("Done!");
             } else {

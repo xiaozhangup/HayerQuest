@@ -1,7 +1,5 @@
 package me.xiaozhangup.hayerquest.utils;
 
-import com.iridium.iridiumcore.dependencies.xseries.XMaterial;
-import com.iridium.iridiumcore.utils.InventoryUtils;
 import com.iridium.iridiumskyblock.IridiumSkyblock;
 import com.iridium.iridiumskyblock.database.User;
 import me.xiaozhangup.hayerquest.DataMaster;
@@ -10,8 +8,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.List;
 
 public class ItemChecker {
 
@@ -32,7 +28,9 @@ public class ItemChecker {
         for (ItemStack itemStack : quest.getItems()) {
             removeAmount(inventory, itemStack.getType(), itemStack.getAmount());
         }
+        p.getInventory().addItem(quest.getiReward().toArray(new ItemStack[0]));
         DataMaster.addOnceDone(island, quest.getId());
+        quest.giveReward(p);
         return true;
     }
 
@@ -41,7 +39,7 @@ public class ItemChecker {
         ItemStack[] var3 = inventory.getContents();
         int var4 = var3.length;
 
-        for(int var5 = 0; var5 < var4; ++var5) {
+        for (int var5 = 0; var5 < var4; ++var5) {
             ItemStack item = var3[var5];
             if (item != null && material.equals(item.getType()) && !item.hasItemMeta()) {
                 total += item.getAmount();
@@ -57,7 +55,7 @@ public class ItemChecker {
         ItemStack[] var5 = inventory.getContents();
         int var6 = var5.length;
 
-        for(int var7 = 0; var7 < var6; ++var7) {
+        for (int var7 = 0; var7 < var6; ++var7) {
             ItemStack itemStack = var5[var7];
             if (itemStack == null) {
                 ++index;
@@ -69,7 +67,7 @@ public class ItemChecker {
                 if (material == itemStack.getType()) {
                     if (removed + itemStack.getAmount() <= amount) {
                         removed += itemStack.getAmount();
-                        inventory.setItem(index, (ItemStack)null);
+                        inventory.setItem(index, null);
                     } else {
                         itemStack.setAmount(itemStack.getAmount() - (amount - removed));
                         removed += amount;
