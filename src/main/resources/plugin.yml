@@ -9,9 +9,5 @@ depend:
 commands:
   istodo:
     description: The island todo book
-  isback:
-    description: Inside command
   ispull:
-    description: Inside command
-  isopen:
     description: Inside command

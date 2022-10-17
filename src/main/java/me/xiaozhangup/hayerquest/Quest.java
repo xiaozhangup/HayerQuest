@@ -1,12 +1,15 @@
 package me.xiaozhangup.hayerquest;
 
+import com.iridium.iridiumskyblock.IridiumSkyblock;
+import com.iridium.iridiumskyblock.bank.BankItem;
+import com.iridium.iridiumskyblock.database.User;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
 public class Quest {
-    String id;
+    Integer id;
     String name;
     List<ItemStack> items;
     Integer value;
@@ -15,11 +18,21 @@ public class Quest {
     Integer exp;
     Integer money;
 
-    public String getId() {
+    String content;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -71,7 +84,7 @@ public class Quest {
         this.money = money;
     }
 
-    public Quest(String n, List<ItemStack> request, Integer point, Integer c, Integer e, Integer m, String i) {
+    public Quest(String n, List<ItemStack> request, Integer point, Integer c, Integer e, Integer m, Integer i, String con) {
 
         items = request;
         value = point;
@@ -82,12 +95,25 @@ public class Quest {
         crystal = c;
         exp = e;
         money = m;
+        content = con;
     }
 
 
 
     public void giveReward(Player p) {
-        //todo
+
+        BankItem bcrystal = IridiumSkyblock.getInstance().getBankItems().crystalsBankItem;
+        BankItem bmoney = IridiumSkyblock.getInstance().getBankItems().moneyBankItem;
+        BankItem bexperience = IridiumSkyblock.getInstance().getBankItems().experienceBankItem;
+
+        User user = IridiumSkyblock.getInstance().getUserManager().getUser(p);
+        var is = user.getIsland();
+        if (is.isEmpty()) return;
+        var island = is.get();
+
+        DataMaster.addLandBank(island, bcrystal, crystal);
+        DataMaster.addLandBank(island, bmoney, money);
+        DataMaster.addLandBank(island, bexperience, exp);
     }
 
 }

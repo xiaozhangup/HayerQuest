@@ -4,6 +4,7 @@ import com.iridium.iridiumskyblock.IridiumSkyblock;
 import com.iridium.iridiumskyblock.api.IridiumSkyblockAPI;
 import com.iridium.iridiumskyblock.bank.BankItem;
 import me.xiaozhangup.hayerquest.ui.TreeBook;
+import me.xiaozhangup.hayerquest.utils.ItemChecker;
 import me.xiaozhangup.hayerquest.utils.command.Command;
 import me.xiaozhangup.hayerquest.utils.manager.ConfigManager;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -14,20 +15,11 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import me.xiaozhangup.hayerquest.utils.manager.ListenerManager;
 
-import java.util.HashMap;
-import java.util.Timer;
-
 public class HayerQuest extends JavaPlugin {
 
     public static Plugin plugin;
     public static ListenerManager listenerManager = new ListenerManager();
-    Timer timer = new Timer();
     private static Economy econ = null;
-    public static HashMap<Integer, HashMap<String, Integer>> works = new HashMap<>();
-
-    public static BankItem crystal = IridiumSkyblock.getInstance().getBankItems().crystalsBankItem;
-    public static BankItem money = IridiumSkyblock.getInstance().getBankItems().moneyBankItem;
-    public static BankItem experience = IridiumSkyblock.getInstance().getBankItems().experienceBankItem;
 
     public static MiniMessage mm = MiniMessage.miniMessage();
 
@@ -52,30 +44,19 @@ public class HayerQuest extends JavaPlugin {
             TreeBook.open((Player) commandSender);
             return true;
         });
-        Command.register("isback", (commandSender, command, s, inside) -> {
-            Player p = (Player) commandSender;
-            if ("once".equals(inside[0])) {
-                TreeBook.open(p);
-            }
-            return false;
-        });
         Command.register("ispull", (commandSender, command, s, inside) -> {
-            /*your way*/
-            return false;
-        });
-        Command.register("isopen", (commandSender, command, s, inside) -> {
             Player p = (Player) commandSender;
-            if ("o".equals(inside[0])) {
+            if (ItemChecker.check(p, QuestLoader.once.get(Integer.parseInt(inside[0]) - 1))) {
+                p.sendMessage("Done!");
+            } else {
+                p.sendMessage("Not!");
             }
             return false;
         });
 
-        ConfigManager.createFile("land");
         ConfigManager.createFile("done");
 
         QuestLoader.loadQuest();
-
-        timer.schedule(new DataPasser(), 0, 10000);
 
     }
 
