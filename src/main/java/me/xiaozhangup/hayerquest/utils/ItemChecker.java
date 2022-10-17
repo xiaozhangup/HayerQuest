@@ -20,7 +20,7 @@ public class ItemChecker {
         var island = is.get();
 
         for (ItemStack itemStack : quest.getItems()) {
-            if (getMaterialAmount(inventory, itemStack.getType()) <= itemStack.getAmount()) {
+            if (getMaterialAmount(inventory, itemStack.getType()) < itemStack.getAmount()) {
                 return false;
             }
         }
@@ -41,7 +41,7 @@ public class ItemChecker {
 
         for (int var5 = 0; var5 < var4; ++var5) {
             ItemStack item = var3[var5];
-            if (item != null && material.equals(item.getType()) && !item.hasItemMeta()) {
+            if (item != null && material == item.getType() && !item.hasItemMeta()) {
                 total += item.getAmount();
             }
         }
