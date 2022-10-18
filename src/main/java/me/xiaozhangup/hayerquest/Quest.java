@@ -110,7 +110,6 @@ public class Quest {
 
         BankItem bcrystal = IridiumSkyblock.getInstance().getBankItems().crystalsBankItem;
         BankItem bmoney = IridiumSkyblock.getInstance().getBankItems().moneyBankItem;
-        BankItem bexperience = IridiumSkyblock.getInstance().getBankItems().experienceBankItem;
 
         User user = IridiumSkyblock.getInstance().getUserManager().getUser(p);
         var is = user.getIsland();
@@ -119,7 +118,7 @@ public class Quest {
 
         DataMaster.addLandBank(island, bcrystal, crystal);
         DataMaster.addLandBank(island, bmoney, money);
-        DataMaster.addLandBank(island, bexperience, exp);
+        island.setExperience(island.getTotalExperience() + exp);
     }
 
 }
