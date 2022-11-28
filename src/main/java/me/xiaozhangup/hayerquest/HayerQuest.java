@@ -10,6 +10,7 @@ import me.xiaozhangup.hayerquest.utils.manager.ListenerManager;
 import me.xiaozhangup.hayerquest.utils.tools.IString;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -45,9 +46,11 @@ public class HayerQuest extends JavaPlugin {
             return true;
         });
         Command.register("isquestreload", (commandSender, command, s, inside) -> {
-            QuestLoader.once.clear();
-            QuestLoader.loadQuest();
-            commandSender.sendMessage(mm.deserialize("已经重载了所有任务"));
+            if (commandSender instanceof ConsoleCommandSender || commandSender.isOp()){
+                QuestLoader.once.clear();
+                QuestLoader.loadQuest();
+                commandSender.sendMessage(mm.deserialize("已经重载了所有任务"));
+            }
             return true;
         });
         Command.register("ispull", (commandSender, command, s, inside) -> {
