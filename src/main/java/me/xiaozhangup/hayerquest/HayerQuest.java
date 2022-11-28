@@ -44,6 +44,12 @@ public class HayerQuest extends JavaPlugin {
             TreeBook.open((Player) commandSender);
             return true;
         });
+        Command.register("isquestreload", (commandSender, command, s, inside) -> {
+            QuestLoader.once.clear();
+            QuestLoader.loadQuest();
+            commandSender.sendMessage(mm.deserialize("已经重载了所有任务"));
+            return true;
+        });
         Command.register("ispull", (commandSender, command, s, inside) -> {
             Player p = (Player) commandSender;
 
@@ -56,7 +62,7 @@ public class HayerQuest extends JavaPlugin {
             if (ItemChecker.check(p, QuestLoader.once.get(Integer.parseInt(inside[0]) - 1))) {
                 p.sendMessage(IString.addColor(prefix + "&a你的任务提交完成! 请查看书本来知晓下一个任务的内容."));
             } else {
-                p.sendMessage(IString.addColor(prefix + "&c任务提交失败.请注意购买获得的物品是无法用于任务提交的!"));
+                p.sendMessage(IString.addColor(prefix + "&c任务提交失败.请注意有NBT物品是无法用于任务提交的!"));
             }
             return false;
         });

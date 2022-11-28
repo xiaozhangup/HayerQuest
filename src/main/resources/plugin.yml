@@ -12,3 +12,5 @@ commands:
     description: The island todo book
   ispull:
     description: Inside command
+  isquestreload:
+    description: Reload command

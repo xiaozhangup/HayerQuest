@@ -21,7 +21,7 @@ public class TreeBook {
         var island = is.get();
 
         if (DataMaster.getLastDone(island) >= QuestLoader.once.size()) {
-            var book = Book.book(mm.deserialize("Todo"), mm.deserialize("HAPPYLAND Dev"), mm.deserialize("      <b><black>空岛任务</black></b> <b><gold>当前</gold></b>\n<dark_gray><click:run_command:'/is'><-返回</click></dark_gray>\n\n你完成了所有任务!\n但这并不代表结束了,因为我们会一直向其中添加任务."));
+            var book = Book.book(mm.deserialize("Todo"), mm.deserialize("HAPPYLAND Dev"), mm.deserialize("      <b><black>空岛任务</black></b> <b><gold>当前</gold></b>\n<dark_gray><click:run_command:'/is'><-返回</click></dark_gray>\n\n你完成了所有任务!"));
             p.openBook(book);
             return;
         }
